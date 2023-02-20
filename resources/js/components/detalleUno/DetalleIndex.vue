@@ -68,11 +68,11 @@
                 console.log(data);
                 saveData (this.user.id, data)
 
-                //  swal.fire({
-				// 		icon: 'Ingresa',
-				// 		title: `Usuario ${this.is_create ? 'created' : 'updated'}`,
-				// 		text: 'Usuario registrado!'
-				// 	})
+                 swal.fire({
+						icon: 'Ingresa',
+						title: 'Felicidades',
+						text: 'producto añadido al carrito de compras'
+					})
                 }
             }
         }

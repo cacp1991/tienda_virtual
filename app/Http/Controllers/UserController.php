@@ -31,33 +31,33 @@ class UserController extends Controller
     //     }
     // }
 
-    public function UpdateUsers (User $user, Request $request)
+    public function UpdateUsers(User $user, Request $request)
     {
         try {
             DB::beginTransaction();
             $allrequest = $request->all();
-            if (isset($allrequest['password'])){
+            if (isset($allrequest['password'])) {
                 if (!$allrequest['password']) unset($allrequest['password']);
-           }
-           $user->update($request->all());
-           DB::commit();
+            }
+            $user->update($request->all());
+            DB::commit();
 
-           if ($request->ajax()) return response()->json(['user'=> $user->refresh()], 201);
-           return back()->with('success', 'usuario editado');
-         }catch (\Throwable $th){
+            if ($request->ajax()) return response()->json(['user' => $user->refresh()], 201);
+            return back()->with('success', 'usuario editado');
+        } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
-         }
+        }
     }
 
 
-      // traemos roles
+    // traemos roles
 
-      public function getAllRoles()  //api
-      {
-          $roles = Role::all()->pluck('name');
-          return response()->json(['roles' => $roles], 200);
-      }
+    public function getAllRoles()  //api
+    {
+        $roles = Role::all()->pluck('name');
+        return response()->json(['roles' => $roles], 200);
+    }
 
     //blade roles
     public function showCreateUser()
@@ -103,29 +103,27 @@ class UserController extends Controller
 
 
     // para guardar usuarios
-    public function saveUser(User $user, Request $request)
+    public function saveUser(User $user, CreateUserRequest $request)
     {
         $user = new User($request->all());
         $user->save();
         $user->assignRole($request->role);
-        // dd($request);
         return response()->json(['users' => $user], 201);
     }
 
     //actualizar usuarios
 
-    public function updateUser(  User $user, Request $request)
+    public function updateUser(User $user, CreateUserRequest $request)
     {
         $requestAll = $request->all();  //tomamos request
         $user->update($requestAll);
-        return response()->json(['user' => $user->refresh()->load('rol_id')],201);
-        // return response()->json($user->refresh(), 201); //hace referencia a respuesta 201
+        return response()->json(['user' => $user->refresh()->load('rol_id')], 201);
     }
 
 
     //eliminar usuario
 
-    public function deleteUser( User $user)
+    public function deleteUser(User $user)
     {
         $user->delete();
         return response()->noContent();

@@ -28,15 +28,15 @@
 	export default {
 		components: {
 			userList,
-			userModal,
+			userModal
 		},
 		data() {
 			return {
-                cargar:false,
-                users: [],
+                // cargar:false,
+                // users: [],
 				cargar_modal: false, //secccion crear usuarios
 				usermodal: null,
-                user: {}
+                user: null
 			}
 		},
 		methods: {

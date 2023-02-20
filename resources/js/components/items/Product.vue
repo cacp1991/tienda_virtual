@@ -29,11 +29,11 @@
 		},
 		data() {
 			return {
-				load: false,
-				products: [],
+				// load: false,
+				// products: [],
 				load_modal: false,
 				anymodal: null,
-				product: {}
+				product: null
 			}
 		},
 		methods: {

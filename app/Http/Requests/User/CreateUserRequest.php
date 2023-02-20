@@ -15,7 +15,7 @@ class CreateUserRequest extends FormRequest
     }
 
 
-    public function rules(User $user)
+    public function rules()
     {
         return [
             'number_id' => ['required', 'string', 'unique:users,number_id'],
