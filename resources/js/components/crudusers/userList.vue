@@ -6,6 +6,7 @@
 				<th>name</th>
 				<td>last_name</td>
 				<td>email</td>
+				<td>password</td>
 				<td>actions</td>
 			</tr>
 		</thead>
@@ -56,6 +57,7 @@
                     { data: 'name' },
                     { data: 'last_name' },
                     { data: 'email' },
+                    { data: 'confirm_password' },
                     { data: 'actions' }]
 				})
 			},

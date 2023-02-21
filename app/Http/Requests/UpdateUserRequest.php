@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests;
 
-
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
 
     public function authorize()
@@ -14,24 +12,22 @@ class CreateUserRequest extends FormRequest
         return true;
     }
 
-
     public function rules()
     {
         return [
-           
-            'number_id' => ['required', 'unique:users,number_id'],
+			'number_id' => ['required', 'numeric', "unique:users,number_id,{$this->user->id}"],
             'name' => ['required', 'string'],
-            'last_name' => ['required', 'string'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-
+			'last_name' => ['required', 'string'],
+			'email' => ['required', 'email', "unique:users,email,{$this->user->id}"],
+			'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'confirm_passowrd' => ['required', 'string'],
+			'role' => ['required'],
         ];
     }
-
     public function messages()
     {
         return [
-            'number_id.required' => 'El documento es requerido',
+            'number_id.require' => 'El documento es requerido',
             'number_id.string' => 'El documento no es un número',
             'number_id.unique' => 'El documento ya fue tomado',
 
@@ -48,7 +44,7 @@ class CreateUserRequest extends FormRequest
             'password.required' => 'La contraseña es requerida',
             'password.string' => 'La contraseñadebe ser valida',
             'password.min' => 'La contraseña no cumple el rango solicitado',
-            'password.confirmed' => 'La contraseña no coincide',
+            'password.confirmed' => 'La contraseñacoincide',
         ];
     }
 }

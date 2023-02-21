@@ -3,8 +3,8 @@
 		<table class="table" id="categoryTable" @click="getEvent">
 			<thead>
 				<tr>
-					<th>name</th>
 					<th>image</th>
+					<th>name</th>
 					<td>actions</td>
 				</tr>
 			</thead>
@@ -19,8 +19,8 @@
 		data() {
 			return {
 				cargar: false,
-				// categories: [],
-				datatable: {}
+				datatable: {},
+				categories: []
 			}
 		},
 		mounted() {
@@ -38,8 +38,9 @@
 					ajax: {
 						url: '/Categories/GetAllCategoriesDataTable'
 					},
-					columns: [{ data: 'name' },
-                     { data: 'image' },
+					columns: [
+                        { data: 'image' },
+                        { data: 'name' },
                       { data: 'actions' }]
 				})
 			},

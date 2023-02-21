@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,28 +11,29 @@ use Spatie\Permission\Models\Permission;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\User\CreateUserRequest;
 
+
 class UserController extends Controller
 {
 
     //guardamos role
 
-    // public function createUser(CreateUserRequest $request)
-    // {
-    //     try {
-    //         DB::beginTransaction();
-    //         $user = new User($request->all());
-    //         $user->save();
-    //         $user->assignRole($request->role); // asignar role
-    //         DB::commit();
-    //         if ($request->ajax()) return response()->json($user, 201);
-    //         return back()->with('success', 'User created');
-    //     } catch (\Throwable $th) {
-    //         DB::rollback();
-    //         throw $th;
-    //     }
-    // }
+    public function createUser(CreateUserRequest $request)
+    {
+        try {
+            DB::beginTransaction();
+            $user = new User($request->all());
+            $user->save();
+            $user->assignRole($request->role); // asignar role
+            DB::commit();
+            if ($request->ajax()) return response()->json($user, 201);
+            return back()->with('success', 'User created');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            throw $th;
+        }
+    }
 
-    public function UpdateUsers(User $user, Request $request)
+    public function UpdateUsers( User $user, UpdateUserRequest $request  )
     {
         try {
             DB::beginTransaction();
@@ -113,7 +115,7 @@ class UserController extends Controller
 
     //actualizar usuarios
 
-    public function updateUser(User $user, CreateUserRequest $request)
+    public function updateUser(User $user, UpdateUserRequest $request)
     {
         $requestAll = $request->all();  //tomamos request
         $user->update($requestAll);

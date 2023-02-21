@@ -67,11 +67,12 @@
 <script>
 	export default {
 		props: ['category_data'],
+
 		data() {
 			return {
 				is_create: true,
-				category: {},
-				file: null
+				file: null,
+				category: {}
 			}
 		},
 		created() {
@@ -80,6 +81,7 @@
 		methods: {
 			index() {
 				this.setCategory()
+
 			},
 			setCategory() {
 				if (!this.category_data) return
@@ -102,6 +104,7 @@
 					const category = this.loadFormData()
 
 					if (this.is_create) {
+                        // console.log(category)
 						await axios.post('Categories/SaveCategory', category)
 					} else {
 						await axios.post(`Categories/UpdateCategory/${this.category.id}`, category)
@@ -109,18 +112,36 @@
 					swal.fire({
 						icon: 'success',
 						title:'Felicidades',
-						// title: `Category ${this.is_create ? 'created' : 'updated'}`,
+
 						text: 'Categoria registrada!'
 					})
 					// aca tenemos la funcion del modal padre
 					this.$parent.closeModal()
-				} catch (error) {
-					console.error(error)
-					swal.fire({
-						icon: 'error',
-						title: 'Oops...',
-						text: 'Algo salio mal!'
-					})
+				}
+                catch (error) {
+					if (error.response.status != '422') {
+						await swal.fire({
+							icon: 'error',
+							title: '¡Ocurrio un error!'
+						})
+						console.error(error)
+						return
+					}
+					if (!Array.isArray(error.response.data)) {
+						await swal.fire({
+							icon: 'warning',
+							title: error.response.data.message
+						})
+					} else {
+						let message = ''
+						error.response.data.array.forEach(element => {
+							message += ` - ${element.message} `
+						})
+						await swal.fire({
+							icon: 'warning',
+							title: message
+						})
+					}
 				}
 			}
 		}

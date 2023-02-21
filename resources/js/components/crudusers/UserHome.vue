@@ -48,7 +48,7 @@
 					this.usermodal = new bootstrap.Modal(
 						document.getElementById('user_modal'),
 						{
-							keyboard: false
+							keyboard: true
 						}
 					)
 					this.usermodal.show()

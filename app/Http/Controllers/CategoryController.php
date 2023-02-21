@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
@@ -65,7 +67,7 @@ class CategoryController extends Controller
     }
 
     // para guardar categoria
-    public function saveCategory(Request $request)
+    public function saveCategory(category $categories, CategoryRequest $request)
     {
         $categories = new Category($request->all());
         $this->uploadImages($request, $categories);
@@ -73,7 +75,7 @@ class CategoryController extends Controller
         return response()->json(['categories' => $categories], 201);
     }
 
-    public function updateCategory(Category $category, Request $request)
+    public function updateCategory(Category $category, UpdateCategoryRequest $request)
     {
         $requestAll = $request->all();  //tomamos request
         $this->uploadImages($request, $category);  //realizamos subida
