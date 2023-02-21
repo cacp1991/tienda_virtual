@@ -11,7 +11,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">
-						{{ `${is_create ? 'Crear' : 'Actualizar'} category` }}
+						{{ `${is_create ? 'Crear' : 'Actualizar'} categoria` }}
 					</h5>
 
 					<button
@@ -51,10 +51,10 @@
 								class="btn btn-secondary me-2"
 								data-dismiss="modal"
 							>
-								Close
+								cerrar
 							</button>
 							<button type="submit" class="btn btn-primary">
-								{{ `${is_create ? 'Create' : 'Update'}` }}
+								{{ `${is_create ? 'Crear' : 'Actualizar'}` }}
 							</button>
 						</section>
 					</form>
@@ -108,8 +108,9 @@
 					}
 					swal.fire({
 						icon: 'success',
-						title: `Category ${this.is_create ? 'created' : 'updated'}`,
-						text: 'Category registrada!'
+						title:'Felicidades',
+						// title: `Category ${this.is_create ? 'created' : 'updated'}`,
+						text: 'Categoria registrada!'
 					})
 					// aca tenemos la funcion del modal padre
 					this.$parent.closeModal()

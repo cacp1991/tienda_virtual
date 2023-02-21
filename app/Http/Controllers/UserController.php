@@ -103,7 +103,7 @@ class UserController extends Controller
 
 
     // para guardar usuarios
-    public function saveUser(User $user, CreateUserRequest $request)
+    public function saveUser( CreateUserRequest $request)
     {
         $user = new User($request->all());
         $user->save();
@@ -139,13 +139,13 @@ class UserController extends Controller
 				onclick='event.preventDefault();'
 				data-id='{$row->id}'
 				role='edit'
-				class='btn btn-warning btn-sm'>Edit</a>
+				class='btn btn-warning btn-sm'>Editar</a>
 				<a
 
 				onclick='event.preventDefault();'
 				data-id='{$row->id}'
 				role='delete'
-				class='btn btn-danger btn-sm'>Delete</a>";
+				class='btn btn-danger btn-sm'>Eliminar</a>";
             })
             ->rawColumns(['actions'])
             ->make();

@@ -114,13 +114,13 @@ class CategoryController extends Controller
 				onclick='event.preventDefault();'
 				data-id='{$row->id}'
 				role='edit'
-				class='btn btn-warning btn-sm'>Edit</a>
+				class='btn btn-warning btn-sm'>Editar</a>
 				<a
 
 				onclick='event.preventDefault();'
 				data-id='{$row->id}'
 				role='delete'
-				class='btn btn-danger btn-sm'>Delete</a>";
+				class='btn btn-danger btn-sm'>Eliminar</a>";
             })
             ->rawColumns(['actions'])
             ->make();

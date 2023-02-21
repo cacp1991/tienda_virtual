@@ -55,7 +55,7 @@
                     await swal.fire({
 						icon: 'error',
 						title: 'Lo siento...',
-						text: 'Incia sesion'
+						text: 'Inicia sesion para continuar con tu compra'
 					})
                     window.location.replace("/login");
 
@@ -69,7 +69,7 @@
                 saveData (this.user.id, data)
 
                  swal.fire({
-						icon: 'Ingresa',
+						icon: 'success',
 						title: 'Felicidades',
 						text: 'producto añadido al carrito de compras'
 					})

@@ -64,12 +64,12 @@
 			async deleteCategory(category_id) {
 				try {
 					const result = await swal.fire({
-						title: 'Do you want delete the category?',
+						title: 'Quiere eliminar la categoria?',
 						icon: 'warning',
 						showCancelButton: true,
 						confirmButtonColor: '#3085d6',
 						cancelButtonColor: '#d33',
-						confirmButtonText: 'Delete'
+						confirmButtonText: 'Eliminar'
 					})
 
 					if (!result.isConfirmed) return
@@ -79,8 +79,8 @@
 					this.index()
 					swal.fire({
 						icon: 'success',
-						title: 'Congrats!',
-						text: 'Category Deleted!'
+						title: 'Felicidades!',
+						text: 'Categoria Eliminada!'
 					})
 				} catch (error) {
 					console.error(error)

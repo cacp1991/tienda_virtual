@@ -40,7 +40,7 @@
                         <p v-if="errors.length">
                         <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
                         <ul>
-                        <li v-for="error in errors">{{ error }}</li>
+                        <li ></li>
                         </ul>
                     </p>
 						<div class="mb-3">
@@ -103,7 +103,7 @@
 								class="btn btn-secondary me-2"
 								data-dismiss="modal"
 							>
-								Close
+								Cerrar
 							</button>
 							<button type="submit" class="btn btn-primary">
 
