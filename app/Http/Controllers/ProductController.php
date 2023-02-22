@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+
+
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\Product\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -61,15 +65,16 @@ class ProductController extends Controller
     }
 
     // para guardar productos
-    public function saveProduct(Request $request)
+    public function saveProduct( ProductRequest $request)
     {
         $products = new Product($request->all());
         $this->uploadImages($request, $products);
         $products->save();
         return response()->json(['products' => $products], 201);
+        // return response()->json(['saved' => 'OK'], 201);
     }
 
-    public function updateProduct(  Product $product, Request $request)
+    public function updateProduct(  Product $product, ProductRequest $request)
     {
         $requestAll = $request->all();  //tomamos request
         $this->uploadImages($request, $product);  //realizamos subida
@@ -117,6 +122,27 @@ class ProductController extends Controller
             ->rawColumns(['actions'])
             ->make();
     }
+
+    public function store(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string|max:255',
+        'description' => 'required|string',
+        'price' => 'required|numeric',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['errors' => $validator->errors()], 422);
+    }
+
+    $product = new Product;
+    $product->name = $request->name;
+    $product->description = $request->description;
+    $product->price = $request->price;
+    $product->save();
+
+    return response()->json(['message' => 'Producto guardado exitosamente'], 201);
+}
 
 
 }

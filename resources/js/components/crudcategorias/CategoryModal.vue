@@ -42,7 +42,7 @@
 								class="form-control"
 								id="name"
 								v-model="category.name"
-							/>
+							>
 						</div>
 						<hr />
 						<section class="d-flex justify-content-end mt-3">
@@ -71,8 +71,10 @@
 		data() {
 			return {
 				is_create: true,
+				category: {
+                    name:''
+                },
 				file: null,
-				category: {}
 			}
 		},
 		created() {
@@ -93,11 +95,14 @@
 			},
 			loadFormData() {
 				const form_data = new FormData()
-				if (this.file) {
-					form_data.append('image', this.file, this.file.name)
-				}
-				form_data.append('name', this.category.name)
+				if (this.file){
+                    form_data.append('image', this.file, this.file.name) }
+
+                form_data.append('name', this.category.name)
+
 				return form_data
+
+
 			},
 			async storeCategory() {
 				try {

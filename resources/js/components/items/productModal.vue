@@ -111,10 +111,17 @@
 <script>
 	export default {
 		props: ['product_data'],
+
 		data() {
 			return {
 				is_create: true,
-				product: {},
+				product: {
+					category_id: '',
+					name: '',
+					description: '', // aca definimos que es un string
+					price: '',
+					stock: '',
+				},
 				file: null,
 				categories: [] //data
 			}
@@ -135,20 +142,29 @@
 			},
 			loadImage(event) {
 				this.file = event.target.files[0]
+
 			},
-			loadFormData() {
+            loadFormData() {
+				console.log(this.file)
 				const form_data = new FormData()
-				if (this.file) {form_data.append('image', this.file, this.file.name)}
+				if (this.file)
+                {form_data.append('image', this.file, this.file.name)}
+
 				form_data.append('category_id', this.product.category_id)
 				form_data.append('name', this.product.name)
 				form_data.append('description', this.product.description)
 				form_data.append('price', this.product.price)
 				form_data.append('stock', this.product.stock)
+
+
+
+
 				return form_data
 			},
 			async itemProduct() {
 				try {
 					const product = this.loadFormData() //capturamos el formdata
+
 					if (this.is_create) {
 						await axios.post('Products/SaveProduct', product)
 					} else {
@@ -161,13 +177,31 @@
 					})
 
 					this.$parent.closeModal()
-				} catch (error) {
-					console.error(error)
-					swal.fire({
-						icon: 'error',
-						title: 'Oops...',
-						text: 'Algo salio mal!'
-					})
+				}
+                catch (error) {
+					if (error.response.status != '422') {
+						await swal.fire({
+							icon: 'error',
+							title: '¡Ocurrio un error!'
+						})
+						console.error(error)
+						return
+					}
+					if (!Array.isArray(error.response.data)) {
+						await swal.fire({
+							icon: 'warning',
+							title: error.response.data.message
+						})
+					} else {
+						let message = ''
+						error.response.data.array.forEach(element => {
+							message += ` - ${element.message} `
+						})
+						await swal.fire({
+							icon: 'warning',
+							title: message
+						})
+					}
 				}
 			},
 

@@ -75,7 +75,7 @@ class CategoryController extends Controller
         return response()->json(['categories' => $categories], 201);
     }
 
-    public function updateCategory(Category $category, UpdateCategoryRequest $request)
+    public function updateCategory(Category $category, CategoryRequest $request)
     {
         $requestAll = $request->all();  //tomamos request
         $this->uploadImages($request, $category);  //realizamos subida

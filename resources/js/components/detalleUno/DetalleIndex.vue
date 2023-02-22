@@ -26,8 +26,10 @@
     <text class="card-text">{{ product.description }}</text>
     <h3 class="card-price">Precio: ${{ product.price }}</h3>
     <H5 class="card-stock"> {{ product.stock }} unidades disponibles</H5>
+    <input type="number" id=""/>
     <hr>
-    <a class="btn btn-primary" @click="add(product)">añadir a carrito</a>
+    <a class="btn btn-primary" @click="add(product)">añadir a carrito</a><br>
+
   </div>
 </div>
 

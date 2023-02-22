@@ -18,7 +18,8 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-           
+
+            // 'rol_id' => ['required', 'string'],
             'number_id' => ['required', 'unique:users,number_id'],
             'name' => ['required', 'string'],
             'last_name' => ['required', 'string'],
@@ -31,6 +32,7 @@ class CreateUserRequest extends FormRequest
     public function messages()
     {
         return [
+            'rol_id.required' => 'El rol es requerido',
             'number_id.required' => 'El documento es requerido',
             'number_id.string' => 'El documento no es un número',
             'number_id.unique' => 'El documento ya fue tomado',

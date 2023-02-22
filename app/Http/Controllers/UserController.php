@@ -115,11 +115,13 @@ class UserController extends Controller
 
     //actualizar usuarios
 
-    public function updateUser(User $user, UpdateUserRequest $request)
+    public function updateUser(User $user, CreateUserRequest $request)
     {
         $requestAll = $request->all();  //tomamos request
         $user->update($requestAll);
-        return response()->json(['user' => $user->refresh()->load('rol_id')], 201);
+        $user->syncRoles([$request->role]);
+        return response()->json(['user' => $user->refresh()], 201);
+        // ->load('rol_id')
     }
 
 

@@ -4,7 +4,7 @@
 			<thead>
 				<tr>
 					<th>image</th>
-					<th>name</th>
+					<th scope="col">name</th>
 					<td>actions</td>
 				</tr>
 			</thead>
@@ -28,7 +28,7 @@
 		},
 		methods: {
 			async index() {
-				this.cargar = true
+				// this.cargar = true
 				setTimeout(() => this.mountDataTable(), 200)
 			},
 			mountDataTable() {

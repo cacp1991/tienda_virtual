@@ -17,7 +17,8 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
 
-            'name' => ['required', 'string']
+            'image' => ['required', 'file'],
+            'name' => ['required', 'string'],
         ];
     }
     public function messages()

@@ -38,7 +38,7 @@
 					<form  @submit.prevent="storeUser">
 
 						<div class="mb-3">
-							<label for="name" class="form-label" required>number_id</label>
+							<label for="name" class="form-label" >number_id</label>
 							<input
 								type="number"
 								class="form-control"
@@ -145,7 +145,7 @@
 
 					} else {
                         // console.log(user);
-						await axios.put(`Users/UpdateUser/${this.user.id}`, this.user)
+						await axios.post(`Users/UpdateUser/${this.user.id}`, this.user)
 					}
 					swal.fire({
 						icon: 'success',
@@ -156,7 +156,9 @@
 					// aca tenemos la funcion del modal padre
 
 					this.$parent.closeModal()
-				}  catch (error) {
+				}
+
+                catch (error) {
 					if (error.response.status != '422') {
 						await swal.fire({
 							icon: 'error',
@@ -181,6 +183,7 @@
 						})
 					}
 				}
+
 			},
 			async getRoles() {
 				const { data } = await axios.get('Users/GetAllRoles')

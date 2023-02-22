@@ -54,7 +54,7 @@ Route::group(
         Route::get('/GetAllUsersDataTable', 'getAllUsersForDataTable');
         // Route::post('/CreateUser', 'createUser')->name('CrudUsers.index.create-post');// blade
         Route::post('/SaveUser', 'saveUser'); //vue
-        Route::put('/UpdateUser/{user}', 'updateUser')->name('CrudUsers.index.create-put');
+        Route::post('/UpdateUser/{user}', 'updateUser')->name('CrudUsers.index.create-put');
         Route::delete('/deleteUser/{user}', 'deleteUser');
     }
 );
@@ -109,6 +109,10 @@ function () {
 //carro de compras
 Route::group(['prefix' => 'Kart', 'middleware' => ['auth'],'controller' => KartController::class], function () {
     Route::get('/', 'mostrarCarrito')->name('kart');
+    Route::get('/GetCarritoDeComprasConProductos', 'getAllCarritoDeCompras');
+    Route::get('/LoadCart', 'loadCartByUser');
+    Route::post('/AddToCart', 'addToCart');
+    Route::delete('/DeleteItem/{cart}', 'deleteItem');
 });
 
 //carro de compras2

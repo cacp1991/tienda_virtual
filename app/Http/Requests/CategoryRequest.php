@@ -15,8 +15,8 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string'],
             'image' => ['required', 'file'],
+            'name' => ['required', 'string'],
         ];
     }
     public function messages()
@@ -24,8 +24,8 @@ class CategoryRequest extends FormRequest
 		return [
 
 
-			'name.required' => 'El nombre de la categoria  es requerido.',
 			'image.required' => 'imagen es requerida',
+			'name.required' => 'El nombre de la categoria  es requerido.',
 
 
 		];
